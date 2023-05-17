@@ -1,54 +1,93 @@
 <?php
+function foo()
+{
+  $user = 'u52814'; // Заменить на ваш логин uXXXXX
+  $pass = '5281480'; // Заменить на пароль, такой же, как от SSH
+  $db1 = new PDO('mysql:host=localhost;dbname=u52834', $user, $pass,
+    [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
+  return $db1;
 
-/**
- * Файл login.php для не авторизованного пользователя выводит форму логина.
- * При отправке формы проверяет логин/пароль и создает сессию,
- * записывает в нее логин и id пользователя.
- * После авторизации пользователь перенаправляется на главную страницу
- * для изменения ранее введенных данных.
- **/
+}
 
-// Отправляем браузеру правильную кодировку,
-// файл login.php должен быть в кодировке UTF-8 без BOM.
 header('Content-Type: text/html; charset=UTF-8');
 
-// Начинаем сессию.
+
 session_start();
 
 // В суперглобальном массиве $_SESSION хранятся переменные сессии.
 // Будем сохранять туда логин после успешной авторизации.
 if (!empty($_SESSION['login'])) {
   // Если есть логин в сессии, то пользователь уже авторизован.
-  // TODO: Сделать выход (окончание сессии вызовом session_destroy()
+  
+  //выход (окончание сессии вызовом session_destroy()
   //при нажатии на кнопку Выход).
-  // Делаем перенаправление на форму.
-  header('Location: ./');
+  print('Вы вошли под логином ');
+  print((($_SESSION['login'])));
+  print('. Вы можете выйти или войти под другим логином.');
+  ?>
+  <form action="" method="post">
+    <input type="submit" name="exit" value="Выход" />
+  </form>
+  <?php
+  $a = False;
+  if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['exit']))
+  {
+    $a = True;  
+    session_destroy();
+  }
+  if ($a)
+  {
+    print('Вы вышли из аккаунта.');
+    ?>
+    <a href="index.php">На главную</a>
+    <?php
+  }
+  
 }
 
-// В суперглобальном массиве $_SERVER PHP сохраняет некторые заголовки запроса HTTP
-// и другие сведения о клиненте и сервере, например метод текущего запроса $_SERVER['REQUEST_METHOD'].
+
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 ?>
 
-<form action="" method="post">
+<form action="" method="POST">
   <input name="login" />
   <input name="pass" />
   <input type="submit" value="Войти" />
+
 </form>
 
 <?php
 }
-// Иначе, если запрос был методом POST, т.е. нужно сделать авторизацию с записью логина в сессию.
-else {
 
-  // TODO: Проверть есть ли такой логин и пароль в базе данных.
-  // Выдать сообщение об ошибках.
+else if (!empty($_POST['login'])){
+  
+  $db = foo();
+  $stmt = $db->prepare("SELECT l.login, l.parol FROM lopata l");
+  $b = False;
+  if($stmt->execute()){
 
-  // Если все ок, то авторизуем пользователя.
-  $_SESSION['login'] = $_POST['login'];
-  // Записываем ID пользователя.
-  $_SESSION['uid'] = 123;
+    foreach($stmt as $row){
 
-  // Делаем перенаправление.
-  header('Location: ./');
+      if ($row['login']==$_POST['login'] and $row['parol'] == md5($_POST['pass']))
+        {
+          $b = True;break;}
+    }
+  }
+  
+  if ($b)
+  {
+    $_SESSION['login'] = $_POST['login'];
+    $_SESSION['uid'] = rand(100000000, 9999999999999);
+    header('Location: ./');
+  }
+  else{
+    print('Пользователь не найден');
+    ?>
+    <br/>
+    <a href="index.php">На главную</a>
+    <?php
+  }
+  
+  
 }
+?>
