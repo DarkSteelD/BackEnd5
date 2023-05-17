@@ -4,108 +4,12 @@
 
 <html lang="ru">
   <head>
-    <title>Superhero Registration Form</title>
-    <style>
-/* Общие стили формы */
-.error {
-  border: 2px solid red;
-}
-form {
-  width: 80%;
-  margin: 0 auto;
-  font-family: Arial, sans-serif;
-}
-
-label {
-  display: flex;
-  margin-bottom: 5px;
-}
-input, select, textarea {
-  display: flex;
-  align-self: center;
-  margin-right: 1vw;
-  margin-left: vw ;
-  padding: 5px;
-  margin-bottom: 10px;
-  font-size: 16px;
-  border: none;
-  border-radius: 5px;
-}
-
-input[type="radio"], input[type="checkbox"] {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-textarea {
-  resize: vertical;
-}
-
-button[type="submit"] {
-  background-color: #4b0082;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  margin: 0 auto;
-  display: flex;
-}
-
-/* Стили для фона формы */
-form {
-  background: linear-gradient(to bottom right, #6a5acd, #1e90ff);
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-}
-
-/* Стили для текстовых полей */
-input[type="text"], input[type="email"], select {
-  background-color: rgba(255, 255, 255, 0.7);
-}
-
-/* Стили для радиокнопок и чекбокса */
-input[type="radio"], input[type="checkbox"] {
-  margin-right: 5px;
-}
-label.radio {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
-/* Стили для кнопки отправки формы */
-button[type="submit"] {
-  background-color: #483d8b;
-}
-
-/* Стили для обязательных полей */
-input: , select: , textarea:  {
-  border: 2px solid #dda0dd;
-}
-
-/* Адаптивность для мобильных устройств */
-@media (max-width: 480px) {
-  form {
-    width: 100%;
-    padding: 10px;
-  }
-  
-  input, select, textarea {
-    font-size: 14px;
-    margin-right: 5px;
-  }
-  
-  button[type="submit"] {
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-  </style>
+ <title>Superhero Registration Form</title>
+     <link rel="stylesheet" href="style.css">
   </head>
 <body>
 
-  <?php
+    <?php
   if (!empty($messages)) {
     print('<div id="messages">');
     // Выводим все сообщения.
