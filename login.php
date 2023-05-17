@@ -1,11 +1,11 @@
 <?php
-function foo()
+function connect()
 {
   $user = 'u52814'; // Заменить на ваш логин uXXXXX
-  $pass = '5281480'; // Заменить на пароль, такой же, как от SSH
-  $db1 = new PDO('mysql:host=localhost;dbname=u52834', $user, $pass,
-    [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]); // Заменить test на имя БД, совпадает с логином uXXXXX
-  return $db1;
+  $pass = '2697434'; // Заменить на пароль, такой же, как от SSH
+  $db = new PDO('mysql:host=localhost;dbname=u52814', $user, $pass,
+    [PDO::ATTR_PERSISTENT => true, PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]);
+  return $db;
 
 }
 
@@ -29,13 +29,13 @@ if (!empty($_SESSION['login'])) {
     <input type="submit" name="exit" value="Выход" />
   </form>
   <?php
-  $a = False;
+  $acc = False;
   if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['exit']))
   {
-    $a = True;  
+    $acc = True;  
     session_destroy();
   }
-  if ($a)
+  if ($acc)
   {
     print('Вы вышли из аккаунта.');
     ?>
@@ -61,20 +61,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
 else if (!empty($_POST['login'])){
   
-  $db = foo();
-  $stmt = $db->prepare("SELECT l.login, l.parol FROM lopata l");
-  $b = False;
+  $db = connect();
+  $stmt = $db->prepare("SELECT l.login, l.parol FROM auth l");
+  $base = False;
   if($stmt->execute()){
 
     foreach($stmt as $row){
 
       if ($row['login']==$_POST['login'] and $row['parol'] == md5($_POST['pass']))
         {
-          $b = True;break;}
+          $base = True;break;}
     }
   }
   
-  if ($b)
+  if ($base)
   {
     $_SESSION['login'] = $_POST['login'];
     $_SESSION['uid'] = rand(100000000, 9999999999999);
