@@ -1,6 +1,10 @@
 .error {
   border: 2px solid red;
 }
+body {
+    display: block;
+    margin: 8px;
+}
 form {
   width: 80%;
   margin: 0 auto;
