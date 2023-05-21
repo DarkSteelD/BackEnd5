@@ -30,11 +30,11 @@
 
 <h1 style="text-align: center;"> Набор героев</h1>
   <form action="index.php" method="POST">
-  <label for="name">Имя:</label>
-  <input name="name" <?php if ($errors['name']) {print 'class="error"';} ?> value="<?php print $values['name']; ?>" />
+  <label for="name">Имя:</label>  <input name="name" <?php if ($errors['name']) {print 'class="error"';} ?> value="<?php print $values['name']; ?>" />
 
-  <label for="email">E-mail:</label>
-  <input name="email" <?php if ($errors['email']) {print 'class="error"';} ?> value="<?php print $values['email']; ?>" type="email" />
+
+  <label for="email">E-mail:</label>  <input name="email" <?php if ($errors['email']) {print 'class="error"';} ?> value="<?php print $values['email']; ?>" type="email" />
+
 
   <label for="year">Год рождения:</label>
   <select id="year" name="year"  >
