@@ -190,7 +190,7 @@ if (empty($_POST['gender']) || !($_POST['gender']=='1' || $_POST['gender']=='2')
     setcookie('gender_value', $_POST['gender'], time() + 30 * 24 * 60 * 60);
   }
 
-if (empty($_POST['limbs']) || !is_numeric($_POST['limbs']) || (($_POST['limbs']==2) || ($_POST['limbs']==4)))  {
+if (empty($_POST['limbs']) || !is_numeric($_POST['limbs']) || !($_POST['limbs']==2 || $_POST['limbs']==4))  {
     
     setcookie('limbs_error', '1', time() + 24 * 60 * 60);
     $errors = TRUE;
