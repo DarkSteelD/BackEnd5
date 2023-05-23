@@ -266,7 +266,7 @@ if (empty($_POST['bio']) || !preg_match('/^([a-zA-Z\'\-]+\s*|[а-яА-ЯёЁ\'\-
       $stmt->bindParam(':my_pol', $_POST['gender']);
       $stmt->bindParam(':my_konech', $_POST['limbs']);
       $stmt->bindParam(':my_biogr', $_POST['bio']);
-      $stmt->bindParam(':my_log_c', $_SESSION['login']);
+      $stmt->bindParam(':my_login', $_SESSION['login']);
       $stmt->execute();
   }
   else {
