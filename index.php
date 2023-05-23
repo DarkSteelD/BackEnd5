@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'GET') {
     
     $sp = array();
     $stmt = $db->prepare("SELECT s.tip FROM auth l, application
- z, sposob s, svyaz sz WHERE l.login = '1876' and l.id_z = z.id_z and z.id_z = sz.id_z and sz.id_s = s.id_s");  
+ z, abilities s, sv sz WHERE l.login = '1876' and l.id_z = z.id_z and z.id_z = sz.id_z and sz.id_s = s.id_s");  
     if($stmt->execute()){
       foreach($stmt as $row){
         array_push($sp, $row['tip']);
